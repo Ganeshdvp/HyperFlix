@@ -1,13 +1,22 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 export const Login = () => {
-  const [isLogin, setIsLogin] = useState(true);
-
+  const [isSignIn, setIsSignIn] = useState(true);
+  const [signInError, setSignInError] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const location = useLocation();
-  
 
   // initial data
   const initialSignUpData = {
@@ -47,16 +56,55 @@ export const Login = () => {
 
   // submit the form
   const submitFormData = (values, { resetForm }) => {
-    console.log(values);
+    const { fullName, email, password } = values;
+
+    if (!isSignIn) {
+      // Sign Up Logic
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          const { uid } = user;
+
+          updateProfile(user, {
+            displayName: fullName,
+            photoURL: "https://png.pngtree.com/png-clipart/20200224/original/pngtree-cartoon-color-simple-male-avatar-png-image_5230557.jpg",
+          })
+            .then(() => {
+              dispatch(addUser({ uid: uid, fullName: fullName, email: email, photoURL: "https://png.pngtree.com/png-clipart/20200224/original/pngtree-cartoon-color-simple-male-avatar-png-image_5230557.jpg" }));
+              navigate("/browser");
+            })
+            .catch((error) => {
+              console.log("Profile update error:", error);
+            });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
+    } else {
+      // Sign in Logic
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          const { uid, displayName, email, photoURL } = user;
+          dispatch(addUser({ uid: uid, fullName: displayName, email: email, photoURL: photoURL }));
+          navigate("/browser");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setSignInError(
+            errorCode === "auth/invalid-credential"
+              ? "Invalid credentials. Please try again."
+              : errorMessage
+          );
+        });
+    }
     resetForm();
   };
 
-
-
-
-  
   const handleLoginClick = () => {
-    setIsLogin(!isLogin);
+    setIsSignIn(!isSignIn);
   };
 
   return (
@@ -76,19 +124,18 @@ export const Login = () => {
         />
       </div>
 
-
       <Formik
-      key={isLogin ? "Sign In" : "Sign Up"}
-        initialValues={isLogin ? initialSignInData : initialSignUpData}
-        validationSchema={isLogin ? signInValidation : signUpValidation}
+        key={isSignIn ? "Sign In" : "Sign Up"}
+        initialValues={isSignIn ? initialSignInData : initialSignUpData}
+        validationSchema={isSignIn ? signInValidation : signUpValidation}
         onSubmit={submitFormData}
       >
         <Form className="flex flex-col items-center p-8 bg-black  absolute z-20 text-amber-50 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 sm:w-3/12">
           <h1 className="py-2 font-bold text-2xl mb-6">
-            {isLogin ? "Sign In" : "Sign Up"}
+            {isSignIn ? "Sign In" : "Sign Up"}
           </h1>
 
-          {!isLogin && (
+          {!isSignIn && (
             <div className="mb-4 w-full flex flex-col">
               <Field
                 className="border border-amber-50 rounded-sm p-2 outline-none"
@@ -98,38 +145,44 @@ export const Login = () => {
                 placeholder="Full Name"
               ></Field>
               <ErrorMessage name="fullName">
-                {(msg) => <span className="text-[12px] text-amber-600">{msg}</span>}
+                {(msg) => (
+                  <span className="text-[12px] text-amber-600">{msg}</span>
+                )}
               </ErrorMessage>
             </div>
           )}
 
           <div className="mb-4 w-full flex flex-col">
             <Field
-            className="border border-amber-50 rounded-sm p-2 outline-none"
-            type="email"
-            name="email"
-            // id="email"
-            placeholder="Email Address"
-          ></Field>
-          <ErrorMessage name="email">
-            {(msg) => <span className="text-[12px] text-amber-600">{msg}</span>}
-          </ErrorMessage>
-          </div>
-  
-          <div className="mb-4 w-full flex flex-col">
-            <Field
-            className="border border-amber-50 rounded-sm p-2 outline-none"
-            type="password"
-            name="password"
-            // id="password"
-            placeholder="Password"
-          ></Field>
-          <ErrorMessage name="password">
-            {(msg) => <span className="text-[12px] text-amber-600">{msg}</span>}
-          </ErrorMessage>
+              className="border border-amber-50 rounded-sm p-2 outline-none"
+              type="email"
+              name="email"
+              // id="email"
+              placeholder="Email Address"
+            ></Field>
+            <ErrorMessage name="email">
+              {(msg) => (
+                <span className="text-[12px] text-amber-600">{msg}</span>
+              )}
+            </ErrorMessage>
           </div>
 
-          {!isLogin && (
+          <div className="mb-4 w-full flex flex-col">
+            <Field
+              className="border border-amber-50 rounded-sm p-2 outline-none"
+              type="password"
+              name="password"
+              // id="password"
+              placeholder="Password"
+            ></Field>
+            <ErrorMessage name="password">
+              {(msg) => (
+                <span className="text-[12px] text-amber-600">{msg}</span>
+              )}
+            </ErrorMessage>
+          </div>
+
+          {!isSignIn && (
             <div className="mb-4 w-full flex flex-col">
               <Field
                 className="border border-amber-50 rounded-sm p-2 outline-none"
@@ -139,7 +192,9 @@ export const Login = () => {
                 placeholder="Confirm Password"
               ></Field>
               <ErrorMessage name="confirmPassword">
-                {(msg) => <span className="text-[12px] text-amber-600">{msg}</span>}
+                {(msg) => (
+                  <span className="text-[12px] text-amber-600">{msg}</span>
+                )}
               </ErrorMessage>
             </div>
           )}
@@ -148,20 +203,22 @@ export const Login = () => {
             className="bg-amber-700 w-full rounded-sm p-2 mb-4 cursor-pointer"
             type="submit"
           >
-            {isLogin ? "Sign In" : "Sign Up"}
+            {isSignIn ? "Sign In" : "Sign Up"}
           </button>
 
-
+          {signInError && (
+            <p className="text-sm text-amber-600 mb-4">{signInError}</p>
+          )}
 
           <p className="text-sm underline mb-4 cursor-pointer">
             Forgot your password?
           </p>
-          
+
           <p
             className="text-md font-sm cursor-pointer"
             onClick={handleLoginClick}
           >
-            {isLogin
+            {isSignIn
               ? "New to Netflix? Sign Up now."
               : "Already have an account? Sign In."}
           </p>
