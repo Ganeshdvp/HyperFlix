@@ -3,6 +3,7 @@ import { HeroPage } from './HeroPage';
 import { Login } from './Login';
 import { RouterProvider } from 'react-router-dom';
 import { Home } from './Home';
+import { ForgetPassword } from './ForgetPassword';
 
 export const Body = () => {
 
@@ -19,6 +20,10 @@ export const Body = () => {
     {
       path:'/home',
       element:<Home/>
+    },
+    {
+      path:'/forget-password',
+      element:<ForgetPassword/>
     }
   ])
 

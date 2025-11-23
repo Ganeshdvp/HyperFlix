@@ -1,18 +1,30 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
-import { PHOTO_URL_DEFAULT, LOGO_URL, BG_IMAGE_URL } from "../utils/constants";
+import {
+  PHOTO_URL_DEFAULT,
+  LOGO_URL,
+  BG_IMAGE_URL,
+  GOOGLE_IMAGE_URL,
+  FACEBOOK_IMAGE_URL,
+  TWITTER_IMAGE_URL,
+  MICROSOFT_IMAGE_URL,
+} from "../utils/constants";
+import * as Yup from "yup";
 
 export const Login = () => {
+  const provider = new GoogleAuthProvider();
+
   const [isSignIn, setIsSignIn] = useState(true);
   const [signInError, setSignInError] = useState("");
   const dispatch = useDispatch();
@@ -55,10 +67,10 @@ export const Login = () => {
       .required("* Required this feild"),
   });
 
+
   // submit the form
   const submitFormData = (values, { resetForm }) => {
     const { fullName, email, password } = values;
-
     if (!isSignIn) {
       // Sign Up Logic
       createUserWithEmailAndPassword(auth, email, password)
@@ -71,7 +83,14 @@ export const Login = () => {
             photoURL: PHOTO_URL_DEFAULT,
           })
             .then(() => {
-              dispatch(addUser({ uid: uid, fullName: fullName, email: email, photoURL: PHOTO_URL_DEFAULT }));
+              dispatch(
+                addUser({
+                  uid: uid,
+                  fullName: fullName,
+                  email: email,
+                  photoURL: PHOTO_URL_DEFAULT,
+                })
+              );
               navigate("/home");
             })
             .catch((error) => {
@@ -88,7 +107,14 @@ export const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           const { uid, displayName, email, photoURL } = user;
-          dispatch(addUser({ uid: uid, fullName: displayName, email: email, photoURL: photoURL }));
+          dispatch(
+            addUser({
+              uid: uid,
+              fullName: displayName,
+              email: email,
+              photoURL: photoURL,
+            })
+          );
           navigate("/home");
         })
         .catch((error) => {
@@ -102,6 +128,32 @@ export const Login = () => {
         });
     }
     resetForm();
+  };
+
+  // Sign in with Google
+  const signInWithGoogle = () => {
+    provider.setCustomParameters({
+      prompt: "select_account",
+    });
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+        const { uid, displayName, email, photoURL } = user;
+        dispatch(
+          addUser({
+            uid: uid,
+            fullName: displayName,
+            email: email,
+            photoURL: photoURL,
+          })
+        );
+        navigate("/home");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleLoginClick = () => {
@@ -131,7 +183,7 @@ export const Login = () => {
         validationSchema={isSignIn ? signInValidation : signUpValidation}
         onSubmit={submitFormData}
       >
-        <Form className="flex flex-col items-center p-8 bg-black  absolute z-20 text-amber-50 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 sm:w-3/12">
+        <Form className="flex flex-col items-center p-8 bg-[rgba(0,0,0,0.6)]  absolute z-20 text-amber-50 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 sm:w-3/12">
           <h1 className="py-2 font-bold text-2xl mb-6">
             {isSignIn ? "Sign In" : "Sign Up"}
           </h1>
@@ -139,7 +191,7 @@ export const Login = () => {
           {!isSignIn && (
             <div className="mb-4 w-full flex flex-col">
               <Field
-                className="border border-amber-50 rounded-sm p-2 outline-none"
+                className="border border-amber-900 rounded-sm p-2 outline-none focus:border-amber-700"
                 type="text"
                 name="fullName"
                 // id="fullName"
@@ -155,7 +207,7 @@ export const Login = () => {
 
           <div className="mb-4 w-full flex flex-col">
             <Field
-              className="border border-amber-50 rounded-sm p-2 outline-none"
+              className="border border-amber-900 rounded-sm p-2 outline-none focus:border-amber-700"
               type="email"
               name="email"
               // id="email"
@@ -170,7 +222,7 @@ export const Login = () => {
 
           <div className="mb-4 w-full flex flex-col">
             <Field
-              className="border border-amber-50 rounded-sm p-2 outline-none"
+              className="border border-amber-900 rounded-sm p-2 outline-none focus:border-amber-700"
               type="password"
               name="password"
               // id="password"
@@ -186,7 +238,7 @@ export const Login = () => {
           {!isSignIn && (
             <div className="mb-4 w-full flex flex-col">
               <Field
-                className="border border-amber-50 rounded-sm p-2 outline-none"
+                className="border border-amber-900 rounded-sm p-2 outline-none focus:border-amber-700"
                 type="password"
                 name="confirmPassword"
                 // id="confirmPassword"
@@ -201,7 +253,7 @@ export const Login = () => {
           )}
 
           <button
-            className="bg-amber-700 w-full rounded-sm p-2 mb-4 cursor-pointer"
+            className="bg-amber-700 w-full rounded-sm p-2 mb-4 cursor-pointer hover:opacity-80"
             type="submit"
           >
             {isSignIn ? "Sign In" : "Sign Up"}
@@ -211,17 +263,46 @@ export const Login = () => {
             <p className="text-sm text-amber-600 mb-4">{signInError}</p>
           )}
 
-          <p className="text-sm underline mb-4 cursor-pointer">
+          <p className="opacity-50"> Or </p>
+
+          {/* authenticated by Icons */}
+
+          <div className="flex justify-center items-center w-full my-4 space-x-8 mb-6">
+            <button
+              type="button"
+              className="w-12 h-12 hover:scale-110 cursor-pointer"
+              onClick={signInWithGoogle}
+            >
+              <img src={GOOGLE_IMAGE_URL} alt="Google" />
+            </button>
+            <img
+              src={FACEBOOK_IMAGE_URL}
+              alt="Facebook"
+              className="w-6 h-6 hover:scale-110"
+            />
+            <img
+              src={MICROSOFT_IMAGE_URL}
+              alt="Microsoft"
+              className="w-6 h-[20px] hover:scale-110"
+            />
+            <img
+              src={TWITTER_IMAGE_URL}
+              alt="Twitter"
+              className="w-6 h-6 hover:scale-110"
+            />
+          </div>
+
+          {isSignIn && (<p
+            className="text-sm underline mb-4 cursor-pointer hover:text-amber-800" onClick={()=> navigate('/forget-password')}
+          >
             Forgot your password?
-          </p>
+          </p>)}
 
           <p
-            className="text-md font-sm cursor-pointer"
-            onClick={handleLoginClick}
+            className="text-sm"
           >
-            {isSignIn
-              ? "New to Netflix? Sign Up now."
-              : "Already have an account? Sign In."}
+           {isSignIn ? ("New to Netflix? ") : ("Already have an account? ")}
+           <span onClick={handleLoginClick} className="hover:text-amber-900 cursor-pointer">{isSignIn ? "Sign Up now." : "Sign In."}</span>
           </p>
         </Form>
       </Formik>

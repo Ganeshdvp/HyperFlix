@@ -57,7 +57,7 @@ export const Header = () => {
               <img
                 src={data?.photoURL}
                 alt="user-avatar"
-                className="w-12 h-12"
+                className="w-10 h-10 rounded-4xl mr-2"
               />
               <span className="text-black font-medium mr-4">
                 Hello, {data?.fullName.length > 10 ? data?.fullName.slice(0,10)+"..." : data?.fullName}

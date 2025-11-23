@@ -61,4 +61,8 @@
 # task-7
 
 -  coverting all the url's into constants file
+- implemented the sigin with google method
+- created forgot password page
+- implement the forgot password logic also
+
 
