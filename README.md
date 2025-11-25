@@ -74,6 +74,18 @@
 - created BgVideoplayer component
 - adjust the thinks properly...
 
+# task-9
+
+- created second container page
+- added the more movies options in moviesSlice
+- created the tv series slice
+- fetching the data from tmdb of "now playing","popular","top rated","tv series","trending tv series";
+- adjusting the cards properly
+- created the custom hooks for "now playing","popular","top rated","tv series","trending tv series";
+
+
+
+
 
 
 

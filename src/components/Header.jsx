@@ -2,8 +2,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { removeUser } from "../utils/userSlice";
+import { addUser, removeUser } from "../utils/userSlice";
 import { LOGO_URL } from "../utils/constants";
+import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { ResetMovies } from '../utils/moviesSlice';
+import { ResetTvSeries } from '../utils/tvSeriesSlice';
+
 
 export const Header = () => {
   const data = useSelector((store) => store.user);
@@ -16,7 +21,9 @@ export const Header = () => {
       .then(() => {
         // Sign-out  successful.
         dispatch(removeUser());
-        navigate("/");
+        dispatch(ResetMovies())
+        dispatch(ResetTvSeries());
+        navigate('/')
       })
       .catch((error) => {
         console.log(error);
@@ -24,14 +31,37 @@ export const Header = () => {
   };
 
 
+  // // it is observer
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       // User is signed in
+  //       const { uid, email, displayName, photoURL } = user;
+  //       dispatch(
+  //         addUser({
+  //           uid: uid,
+  //           fullName: displayName,
+  //           email: email,
+  //           photoURL: photoURL,
+  //         })
+  //       );
+  //       navigate("/home");
+  //     } else {
+  //       // User is signed out
+  //       dispatch(removeUser());
+  //       navigate('/')
+  //     }
+  //   });
+
+  //   return ()=> unsubscribe();
+  // }, []);
+
+
+  
   return (
     <>
       <div className="absolute z-10 flex items-center justify-between w-full mx-auto p-2 px-10 sm:px-32 bg-gradient-to-b from-black">
-        <img
-          src={LOGO_URL}
-          alt="netflix-logo"
-          className="w-44"
-        />
+        <img src={LOGO_URL} alt="netflix-logo" className="w-44" />
         {data === null ? (
           <div className="flex items-center space-x-8">
             <div className="relative inline-block">
@@ -60,7 +90,10 @@ export const Header = () => {
                 className="w-10 h-10 rounded-4xl mr-2"
               />
               <span className="text-white font-medium mr-4">
-                Hello, {data?.fullName.length > 10 ? data?.fullName.slice(0,10)+"..." : data?.fullName}
+                Hello,{" "}
+                {data?.fullName.length > 10
+                  ? data?.fullName.slice(0, 10) + "..."
+                  : data?.fullName}
               </span>
             </div>
             <button

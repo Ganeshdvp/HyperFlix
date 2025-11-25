@@ -10,7 +10,7 @@ export const FirstContainer = () => {
 
   if (movies === null) return;
 
-    const {id, original_title, overview, poster_path, release_date } = movies[1];
+    const {id, original_title, overview, release_date } = movies[1];
 
 
   return (
