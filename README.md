@@ -95,6 +95,7 @@
 - fixing the bugs and ensure everything working fine!
 - hosted again in the firebase!
 
+# task-12
 
-
-
+- added loading tag in the signIn and signUp
+- added shimmer UI in the home page -- pending

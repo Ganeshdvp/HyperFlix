@@ -27,6 +27,8 @@ const useUpComing = ()=>{
     useEffect(()=>{
         upComingMovies();
     },[])
+
+    return upComingMovies();
 }
 
 export default useUpComing;

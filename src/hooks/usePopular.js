@@ -25,6 +25,8 @@ const usePopular = ()=>{
     useEffect(()=>{
         popularMovies();
     },[])
+
+    return popularMovies();
 }
 
 export default usePopular;

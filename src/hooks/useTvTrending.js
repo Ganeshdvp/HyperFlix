@@ -26,6 +26,8 @@ const useTvTrending = ()=>{
     useEffect(()=>{
         tvTrending();
     },[])
+
+    return tvTrending();
 }
 
 export default useTvTrending;

@@ -123,7 +123,7 @@ export const SecondContainer = () => {
         </div>
 
         {/* Trending TV */}
-        <div className="z-20 max-w-screen h-full relative -top-50 mb-8">
+        <div className="z-20 max-w-screen h-full relative -top-50">
           <h2
             className="text-white
          text-2xl font-bold px-8 mb-2"

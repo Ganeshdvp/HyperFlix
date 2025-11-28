@@ -6,6 +6,7 @@ import { removeUser } from "../utils/userSlice";
 import { LOGO_URL } from "../utils/constants";
 import { ResetMovies } from '../utils/moviesSlice';
 import { ResetTvSeries } from '../utils/tvSeriesSlice';
+import { IoMdLogOut } from "react-icons/io";
 
 
 export const Header = () => {
@@ -58,7 +59,7 @@ export const Header = () => {
   
   return (
     <>
-      <div className="absolute z-10 flex items-center justify-between w-full mx-auto p-2 px-10 sm:px-32 bg-gradient-to-b from-black">
+      <div className="absolute z-10 flex items-center justify-between w-full mx-auto p-2 px-10 sm:px-32 bg-linear-to-b from-black">
         <img src={LOGO_URL} alt="netflix-logo" className="w-44" />
         {data.uid === "" ? (
           <div className="flex items-center space-x-8">
@@ -75,7 +76,7 @@ export const Header = () => {
 
             <Link to="/login">
               <button className="bg-amber-700 text-white px-6 py-2 rounded-sm text-sm font-medium cursor-pointer hover:bg-orange-600 ">
-                Sign In
+                 Sign In
               </button>
             </Link>
           </div>
@@ -95,10 +96,10 @@ export const Header = () => {
               </span>
             </div>
             <button
-              className="bg-orange-800 text-white p-2 rounded-sm cursor-pointer hover:bg-orange-700 font-semibold text-sm"
+              className="flex items-center bg-orange-800 text-white p-2 rounded-sm cursor-pointer hover:bg-orange-700 font-semibold text-sm"
               onClick={handleClick}
             >
-              Sign Out
+              <IoMdLogOut className="text-xl mr-1"/> Sign Out
             </button>
           </div>
         )}

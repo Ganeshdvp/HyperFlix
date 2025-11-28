@@ -5,6 +5,8 @@ import { BG_IMAGE_URL } from "../utils/constants";
 import { Accordian } from "./Accordian";
 import { ReasonToJoin } from "./ReasonToJoin";
 import { Trending } from "./Trending";
+import {Footer} from './Footer';
+
 
 export const HeroPage = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -92,6 +94,7 @@ export const HeroPage = () => {
       <Trending/>
       <ReasonToJoin />
       <Accordian />
+      <Footer/>
     </>
   );
 };

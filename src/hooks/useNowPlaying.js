@@ -6,15 +6,15 @@ import { API_OPTIONS } from '../utils/constants';
 
 
 
-
 const useNowPlaying = () => {
-        const dispatch = useDispatch();
+  
+  const dispatch = useDispatch();
 
   // NowPlaying all movies fetching
   const NowPlayingData = async ()=>{
     try{
       const data = await axios.get(`https://api.themoviedb.org/3/movie/now_playing?page=1`, API_OPTIONS);
-      dispatch(NowPlayingCategory(data.data.results))
+      dispatch(NowPlayingCategory(data.data.results));
     }
     catch(error){
       console.log(error);
@@ -23,7 +23,10 @@ const useNowPlaying = () => {
 
   useEffect(()=>{
     NowPlayingData();
-  },[])
+  },[]);
+
+ 
+  return NowPlayingData();
 }
 
 export default useNowPlaying;

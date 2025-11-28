@@ -21,6 +21,9 @@ import {
   MICROSOFT_IMAGE_URL,
 } from "../utils/constants";
 import * as Yup from "yup";
+import {
+  FaSpinner,
+} from "react-icons/fa";
 
 export const Login = () => {
   const provider = new GoogleAuthProvider();
@@ -29,6 +32,7 @@ export const Login = () => {
   const [signInError, setSignInError] = useState("");
   const [otherSignInWay, setOtherSignInWay] = useState(false);
   const [otherSignInWayValue, setOtherSignInWayValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,7 +46,7 @@ export const Login = () => {
     confirmPassword: "",
   };
   const initialSignInData = {
-    email: location.state?.userEmail || "",
+    email: location.state?.userEmail || location.state?.mail || "",
     password: "",
   };
 
@@ -73,6 +77,7 @@ export const Login = () => {
 
   // submit the form
   const submitFormData = (values) => {
+    setIsLoading(true);
     const { fullName, email, password } = values;
     if (!isSignIn) {
       // Sign Up Logic
@@ -80,7 +85,6 @@ export const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           const { uid } = user;
-
           updateProfile(user, {
             displayName: fullName,
             photoURL: PHOTO_URL_DEFAULT,
@@ -95,6 +99,7 @@ export const Login = () => {
                 })
               );
               navigate("/home");
+               setIsLoading(false);
             })
             .catch((error) => {
               console.log("Profile update error:", error);
@@ -103,6 +108,7 @@ export const Login = () => {
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
+          setIsLoading(false);
         });
     } else {
       // Sign in Logic
@@ -119,6 +125,7 @@ export const Login = () => {
             })
           );
           navigate("/home");
+           setIsLoading(false);
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -128,6 +135,7 @@ export const Login = () => {
               ? "Invalid credentials. Please try again."
               : errorMessage
           );
+          setIsLoading(false);
         });
     }
     // resetForm();
@@ -153,9 +161,11 @@ export const Login = () => {
           })
         );
         navigate("/home");
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setIsLoading(false);
       });
   };
 
@@ -172,11 +182,13 @@ export const Login = () => {
       setOtherSignInWayValue("twitter");
     }
     setOtherSignInWay(true);
+    setIsLoading(false);
   }
 
 
   const handleLoginClick = () => {
     setIsSignIn(!isSignIn);
+    setIsLoading(false);
     setOtherSignInWay(false);
     setSignInError("");
   };
@@ -280,7 +292,9 @@ export const Login = () => {
             className="bg-amber-700 w-full rounded-sm p-2 mb-4 cursor-pointer hover:opacity-80"
             type="submit"
           >
-            {isSignIn ? "Sign In" : "Sign Up"}
+            {isLoading ? ( <FaSpinner className="text-white text-2xl animate-spin ml-35"/>) : (
+              <p>{isSignIn ? "Sign In" : "Sign Up"}</p>
+            )}
           </button>
 
           {signInError && (

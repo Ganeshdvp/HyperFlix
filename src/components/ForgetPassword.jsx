@@ -3,25 +3,44 @@ import { LOGO_URL, BG_IMAGE_URL } from "../utils/constants";
 import { sendPasswordResetEmail } from "firebase/auth";
 import {auth} from "../utils/firebase";
 import { useState } from "react";
+import {
+  FaSpinner,
+} from "react-icons/fa";
 
 export const ForgetPassword = () => {
 
     const [email, setEmail] = useState("");
     const [sent, setSent] = useState(false);
+    const [loading,setLoading] = useState(false);
+    const [error,setError] = useState("");
 
 
+    const emailFormat = /^(?!.*\.\.)(?!\.)(?!.*\.$)[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@gmail\.com$/
 
   const handleSendResetMail = () => {
+    if(!email){
+      setError("Please enter your email");
+      return;
+    }
+    if(!emailFormat.test(email)){
+      setError("Please enter valid email format");
+      return;
+    }
+    setSent(false);
+    setLoading(true);
+    setError("");
+    
     sendPasswordResetEmail(auth, email)
       .then(() => {
         // Password reset email sent!
-        console.log("email sent successfully!");
         setSent(true);
+        setLoading(false);
+        setError("")
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
-        // ..
+        setError(errorMessage);
+        setLoading(false);
       });
   };
 
@@ -57,11 +76,14 @@ export const ForgetPassword = () => {
           placeholder="Enter your email"
           className="mx-auto block mt-12 px-4 py-2 w-md rounded-md outline-none text-white bg-gray-800 focus:border-red-600"
         />
-        <button onClick={handleSendResetMail} className="bg-red-600 text-amber-50 px-6 py-2 rounded-md mt-6 block mx-auto hover:bg-red-700">
-          Send Reset Link
+        <button onClick={handleSendResetMail} className="bg-red-600 text-amber-50 px-6 py-2 rounded-md mt-6 block mx-auto hover:bg-red-700 cursor-pointer">
+          {
+            loading ? (<FaSpinner className="text-white text-2xl animate-spin"/>) : "Send"
+          }
         </button>
 
         {sent && <p className="text-amber-500 text-center mt-4 text-sm">Sent successfully! Please check your inbox.</p>}
+        {error && <p className="text-red-500 text-center mt-4 text-sm">{error}</p>}
 
       </div>
     </>
