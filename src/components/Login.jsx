@@ -24,6 +24,8 @@ import * as Yup from "yup";
 import {
   FaSpinner,
 } from "react-icons/fa";
+import { Header } from './Header';
+
 
 export const Login = () => {
   const provider = new GoogleAuthProvider();
@@ -198,13 +200,16 @@ export const Login = () => {
 
   return (
     <>
-      <Link to="/">
+      {/* <Link to="/">
         <img
           src={LOGO_URL}
           alt="netflix-logo"
           className="w-44 absolute z-10 top-2 left-32 cursor-pointer"
         />
-      </Link>
+      </Link> */}
+
+      <Header/>
+      
       <div>
         <img
           src={BG_IMAGE_URL}

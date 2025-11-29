@@ -98,4 +98,12 @@
 # task-12
 
 - added loading tag in the signIn and signUp
-- added shimmer UI in the home page -- pending
+- added footer
+- installed react-icons library
+- adjusting the things!
+
+# task-13
+
+- created the gptSearch component
+- created gptSearchSlice
+- 

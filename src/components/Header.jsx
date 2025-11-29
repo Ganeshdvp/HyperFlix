@@ -4,10 +4,11 @@ import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { removeUser } from "../utils/userSlice";
 import { LOGO_URL } from "../utils/constants";
-import { ResetMovies } from '../utils/moviesSlice';
-import { ResetTvSeries } from '../utils/tvSeriesSlice';
+import { ResetMovies } from "../utils/moviesSlice";
+import { ResetTvSeries } from "../utils/tvSeriesSlice";
+import {toggleGpt} from '../utils/gptSearchSlice';
 import { IoMdLogOut } from "react-icons/io";
-
+import { IoSearch } from "react-icons/io5";
 
 export const Header = () => {
   const data = useSelector((store) => store.user);
@@ -20,15 +21,14 @@ export const Header = () => {
       .then(() => {
         // Sign-out  successful.
         dispatch(removeUser());
-        dispatch(ResetMovies())
+        dispatch(ResetMovies());
         dispatch(ResetTvSeries());
-        navigate('/')
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
 
   // // it is observer
   // useEffect(() => {
@@ -55,12 +55,12 @@ export const Header = () => {
   //   return ()=> unsubscribe();
   // }, []);
 
-
-  
   return (
     <>
       <div className="absolute z-10 flex items-center justify-between w-full mx-auto p-2 px-10 sm:px-32 bg-linear-to-b from-black">
-        <img src={LOGO_URL} alt="netflix-logo" className="w-44" />
+        <Link to={"/"}>
+          <img src={LOGO_URL} alt="netflix-logo" className="w-44" />
+        </Link>
         {data.uid === "" ? (
           <div className="flex items-center space-x-8">
             <div className="relative inline-block">
@@ -76,13 +76,23 @@ export const Header = () => {
 
             <Link to="/login">
               <button className="bg-amber-700 text-white px-6 py-2 rounded-sm text-sm font-medium cursor-pointer hover:bg-orange-600 ">
-                 Sign In
+                Sign In
               </button>
             </Link>
           </div>
         ) : (
           <div className="flex items-center justify-end">
             <div className="flex items-center mx-2">
+              <button
+              onClick={()=> dispatch(toggleGpt(true))}
+                className="text-white text-sm opacity-50 flex items-center mr-8 p-2 rounded-2xl cursor-pointer
+  transition-all duration-200
+  active:border-2 active:border-amber-500
+  active:shadow-[0_0_20px_5px_#f59e0b]"
+              >
+                <IoSearch className="text-lg opacity-70 mr-1" />
+                GPT search
+              </button>
               <img
                 src={data?.photoURL}
                 alt="user-avatar"
@@ -99,7 +109,7 @@ export const Header = () => {
               className="flex items-center bg-orange-800 text-white p-2 rounded-sm cursor-pointer hover:bg-orange-700 font-semibold text-sm"
               onClick={handleClick}
             >
-              <IoMdLogOut className="text-xl mr-1"/> Sign Out
+              <IoMdLogOut className="text-xl mr-1" /> Sign Out
             </button>
           </div>
         )}
