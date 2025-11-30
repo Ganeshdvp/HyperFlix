@@ -10,11 +10,11 @@ import useTvTrending from "../hooks/useTvTrending";
 import { Footer } from "./Footer";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { GptSearch } from "./GptSearch";
+import { SearchMovies } from "./SearchMovies";
 
 export const Home = () => {
   
-  const data = useSelector((store) => store.gptSearch.toggleGptState);
+  const data = useSelector((store) => store.searchMovies.toggleSearchState);
 
   useNowPlaying();
   usePopular();
@@ -43,7 +43,7 @@ export const Home = () => {
 
   return (
     <>
-      {data ? <GptSearch /> : (
+      {data ? <SearchMovies /> : (
         <>
           <Header />
           <FirstContainer />

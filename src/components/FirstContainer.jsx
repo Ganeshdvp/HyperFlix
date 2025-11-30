@@ -17,7 +17,7 @@ export const FirstContainer = () => {
 
   return (
     <>
-      <div className="flex flex-col pl-20 absolute pt-82 bg-linear-to-r from-black w-screen aspect-video shadow-2xl">
+      <div className="flex flex-col pl-20 absolute pt-82 bg-linear-to-r from-black w-screen aspect-video shadow-2xl z-20">
         <h1 className="text-5xl font-bold mb-4 text-white">{original_title}</h1>
         <p className="text-md text-start w-4/12 mb-1 text-gray-300">{overview.length > 250 ? overview.slice(0,250)+ " more..." : overview}</p>
         <p className="text-md mb-8 text-gray-200">Released on :- {release_date}</p>

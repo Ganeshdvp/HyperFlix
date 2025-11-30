@@ -6,9 +6,9 @@ export const SecondContainer = () => {
 
   return (
     <>
-      <div className="bg-black max-w-screen">
+      <div className="bg-black max-w-screen relative top-180">
         {/* Now playing */}
-        <div className="z-20 max-w-screen h-full relative -top-50 mb-8">
+        <div className="z-20 max-w-screen h-full relative -top-20">
           <h2
             className="text-white
          text-2xl font-bold px-8 mb-2"
@@ -31,7 +31,7 @@ export const SecondContainer = () => {
         </div>
 
         {/* Popular */}
-        <div className="z-20 max-w-screen h-full relative -top-50 mb-8">
+        <div className="z-20 max-w-screen h-full relative -top-20 mb-8 mt-10">
           <h2
             className="text-white
          text-2xl font-bold px-8 mb-2"
@@ -54,7 +54,7 @@ export const SecondContainer = () => {
         </div>
 
         {/* Top rated */}
-        <div className="z-20 max-w-screen h-full relative -top-50 mb-8">
+        <div className="z-20 max-w-screen h-full relative -top-20 mb-10">
           <h2
             className="text-white
          text-2xl font-bold px-8 mb-2"
@@ -77,7 +77,7 @@ export const SecondContainer = () => {
         </div>
 
         {/* Up coming */}
-        <div className="z-20 max-w-screen h-full relative -top-50 mb-8">
+        <div className="z-20 max-w-screen h-full relative -top-20 mb-10">
           <h2
             className="text-white
          text-2xl font-bold px-8 mb-2"
@@ -100,7 +100,7 @@ export const SecondContainer = () => {
         </div>
 
          {/* Arriving Today */}
-        <div className="z-20 max-w-screen h-full relative -top-50 mb-8">
+        <div className="z-20 max-w-screen h-full relative -top-20 mb-10">
           <h2
             className="text-white
          text-2xl font-bold px-8 mb-2"
@@ -123,7 +123,7 @@ export const SecondContainer = () => {
         </div>
 
         {/* Trending TV */}
-        <div className="z-20 max-w-screen h-full relative -top-50">
+        <div className="z-20 max-w-screen h-full relative -top-20 mb-180">
           <h2
             className="text-white
          text-2xl font-bold px-8 mb-2"

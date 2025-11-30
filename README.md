@@ -104,6 +104,10 @@
 
 # task-13
 
-- created the gptSearch component
-- created gptSearchSlice
-- 
+- created the searchMovies component
+- created searchMovieSlice
+- wrote logic for search movies from the search tmdb api
+- adjust the things properly
+
+# task-14
+

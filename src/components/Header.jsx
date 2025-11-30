@@ -6,7 +6,7 @@ import { removeUser } from "../utils/userSlice";
 import { LOGO_URL } from "../utils/constants";
 import { ResetMovies } from "../utils/moviesSlice";
 import { ResetTvSeries } from "../utils/tvSeriesSlice";
-import {toggleGpt} from '../utils/gptSearchSlice';
+import {toggleSearch} from '../utils/searchMovieSlice';
 import { IoMdLogOut } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
 
@@ -57,7 +57,7 @@ export const Header = () => {
 
   return (
     <>
-      <div className="absolute z-10 flex items-center justify-between w-full mx-auto p-2 px-10 sm:px-32 bg-linear-to-b from-black">
+      <div className="absolute z-30 flex items-center justify-between w-full mx-auto p-2 px-10 sm:px-32 bg-linear-to-b from-black">
         <Link to={"/"}>
           <img src={LOGO_URL} alt="netflix-logo" className="w-44" />
         </Link>
@@ -84,14 +84,14 @@ export const Header = () => {
           <div className="flex items-center justify-end">
             <div className="flex items-center mx-2">
               <button
-              onClick={()=> dispatch(toggleGpt(true))}
+              onClick={()=> dispatch(toggleSearch(true))}
                 className="text-white text-sm opacity-50 flex items-center mr-8 p-2 rounded-2xl cursor-pointer
   transition-all duration-200
   active:border-2 active:border-amber-500
   active:shadow-[0_0_20px_5px_#f59e0b]"
               >
                 <IoSearch className="text-lg opacity-70 mr-1" />
-                GPT search
+                Search movies
               </button>
               <img
                 src={data?.photoURL}

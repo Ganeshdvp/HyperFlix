@@ -1,0 +1,120 @@
+import React, { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { API_OPTIONS, BG_IMAGE_URL, IMG_URL } from "../utils/constants";
+import { IoSearch } from "react-icons/io5";
+import { GiCrossedBones } from "react-icons/gi";
+import axios from "axios";
+import { searchResultMovie, resetSearchMovies } from "../utils/searchMovieSlice";
+import {Footer} from './Footer';
+
+export const SearchMovies = () => {
+  const dispatch = useDispatch();
+  const text = useRef();
+  const data = useSelector(store=> store.searchMovies.searchResultMovies)
+
+  const [loading, setLoading] = useState(false);
+  const [searchClicked, setSearchClicked] = useState(false);
+
+  const handleSearchClick = async () => {
+    if (!text.current.value) return;
+    setLoading(true)
+
+    //Making tmdb search api call
+   try{
+     const searchMovies = await axios.get(
+      "https://api.themoviedb.org/3/search/movie?query="+text.current.value+"&include_adult=false&page=1",
+      API_OPTIONS
+    );
+    dispatch(searchResultMovie(searchMovies.data.results));
+    setLoading(false);
+    setSearchClicked(true);
+    text.current.value = "";
+   }
+   catch(error){
+    console.log(error);
+   }
+  };
+
+
+  return (
+    <>
+    <div className="bg-black">
+       <div>
+        <img
+          src={BG_IMAGE_URL}
+          alt="hero-image"
+          className="w-full h-screen object-cover brightness-20"
+        />
+      </div>
+
+
+      <GiCrossedBones
+        className="absolute top-10 right-20 text-4xl p-2 text-amber-600 z-20 cursor-pointer rounded-full hover:bg-amber-900 hover:text-amber-50 hover:scale-105 "
+        onClick={() => dispatch(resetSearchMovies())}
+      />
+
+       {/* search container */}
+        <div className="absolute top-1 text-white w-screen p-4 flex justify-center flex-col items-center">
+          <h1 className="text-center pt-10 text-3xl font-bold mb-4 text-amber-600">
+            Welcome! dude
+          </h1>
+          <p className="text-sm text-gray-300 w-[35%] text-center mb-10">
+            "Looking for a movie to watch? Type the name of any movie in the search box, and our AI-powered search will instantly show you matching titles. Only movies with available posters are displayed, so you can easily browse and pick your favorite film."
+          </p>
+
+          <div className="flex items-center">
+            <IoSearch className="text-amber-600 relative left-16" />
+            <input
+              type="text"
+              placeholder="What would you like to watch today?"
+              className="p-2 px-4 pl-9 m-4 border border-amber-600 rounded-md w-md ml-10 outline-none hover:border-amber-800"
+              ref={text}
+            />
+            <button
+              className="p-2 bg-amber-700 rounded-xl px-8 cursor-pointer hover:bg-amber-800"
+              onClick={handleSearchClick}
+            >
+              Search
+            </button>
+          </div>
+        </div>
+
+          {/* Search Suggestions */}
+      {
+        loading ? <p className="text-gray-500 text-xl absolute top-[50%] left-[45%]">Loading...</p> : 
+        searchClicked && data.filter((e)=> e.poster_path).length === 0 ? 
+        (<p className="text-gray-500 text-xl absolute top-[50%] left-[45%]">Not Found</p>) :
+        searchClicked && data.filter((e)=> e.poster_path).length > 0 ? (
+            <div className="z-20 max-w-screen relative -top-80 p-4">
+          <h2
+            className="text-white
+         text-xl font-bold px-26 mb-2"
+          >
+            Search results (<span>{data.filter((e)=> e.poster_path).length}</span>) - <span className="text-2xl text-amber-700">{data[0]?.original_title || data[0]?.title}</span>
+          </h2>
+          <div className="flex flex-wrap justify-start gap-x-6 gap-y-8 px-26 p-4 max-w-full">
+            {data?.filter((e)=> e.poster_path).map((item) => {
+              return (
+                <div key={item.id} className="shrink-0">
+                  <img
+                    src={IMG_URL + item.poster_path}
+                    alt="posters"
+                    className="w-40 h-55 object-cover rounded-xl hover:scale-105 transition-transform duration-300 ease-in-out"
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        ) : null
+
+      }
+
+      <Footer/>
+    </div>
+
+
+      
+    </>
+  );
+};
