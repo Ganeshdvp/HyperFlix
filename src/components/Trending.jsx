@@ -16,7 +16,7 @@ export const Trending = () => {
 
         <h2 className='font-bold text-2xl p-4 sm:text-xl sm:px-6 md:text-2xl md:px-40 lg:px-40 -mb-3 text-white mb-4'>Trending Now</h2>
 
-        <div className='flex space-x-6 mx-auto pb-12 w-[80%] sm:w-[80%] sm:mx-auto md:ml-45 md:w-[75%] overflow-x-auto scrollbar-hide'>
+        <div className='flex space-x-6 mx-auto pb-12 w-[80%] sm:w-[80%] sm:mx-auto md:ml-45 md:w-[75%] overflow-x-auto no-scrollbar'>
             {
             images.map((item,index)=>{
                 return (

@@ -46,7 +46,7 @@ export const Accordian = () => {
           <div key={index} className="rounded-md bg-gray-700 overflow-hidden">
             <div
               onClick={() => handleClick(index)}
-              className="flex items-center justify-between cursor-pointer hover:bg-gray-600 transition-colors duration-300 p-4"
+              className="flex items-center justify-between cursor-pointer hover:bg-gray-600 active:bg-gray-600 transition-colors duration-300 p-4"
             >
               <h3 className="text-md sm:text-lg md:text-lg font-medium">
                 {item.q}

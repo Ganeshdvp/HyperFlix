@@ -214,7 +214,7 @@ export const Login = () => {
         <img
           src={BG_IMAGE_URL}
           alt="hero-image"
-          className="w-full h-screen object-cover brightness-20"
+          className="w-full h-screen object-cover brightness-30"
         />
       </div>
 
@@ -313,24 +313,24 @@ export const Login = () => {
           <div className="flex justify-center items-center w-full my-4 space-x-8 mb-6">
             <button
               type="button"
-              className="w-12 h-12 hover:scale-110 cursor-pointer"
+              className="w-12 h-12 hover:scale-110 cursor-pointer active:scale-110"
               onClick={signInWithGoogle}
             >
               <img src={GOOGLE_IMAGE_URL} alt="Google" />
             </button>
-            <button className="w-6 h-6 hover:scale-110 cursor-pointer" onClick={() => handleSignInOtherWay("facebook")}>
+            <button className="w-6 h-6 hover:scale-110 active:scale-110 cursor-pointer" onClick={() => handleSignInOtherWay("facebook")}>
               <img
               src={FACEBOOK_IMAGE_URL}
               alt="Facebook"
             />
             </button>
-            <button className="w-6 h-5 hover:scale-110 cursor-pointer" onClick={() => handleSignInOtherWay("microsoft")}>
+            <button className="w-6 h-5 hover:scale-110 active:scale-110 cursor-pointer" onClick={() => handleSignInOtherWay("microsoft")}>
               <img
               src={MICROSOFT_IMAGE_URL}
               alt="Microsoft"
             />
             </button>
-            <button className="w-6 h-6 hover:scale-110 cursor-pointer" onClick={() => handleSignInOtherWay("twitter")}>
+            <button className="w-6 h-6 hover:scale-110 active:scale-110 cursor-pointer" onClick={() => handleSignInOtherWay("twitter")}>
               <img
               src={TWITTER_IMAGE_URL}
               alt="Twitter"
@@ -344,7 +344,7 @@ export const Login = () => {
           }
 
           {isSignIn && (<p
-            className="text-sm underline mb-4 cursor-pointer hover:text-amber-800" onClick={()=> navigate('/forget-password')}
+            className="text-sm underline mb-4 cursor-pointer hover:text-amber-800 active:text-amber-800" onClick={()=> navigate('/forget-password')}
           >
             Forgot your password?
           </p>)}
@@ -353,7 +353,7 @@ export const Login = () => {
             className="text-sm"
           >
            {isSignIn ? ("New to HyperFlix? ") : ("Already have an account? ")}
-           <span onClick={handleLoginClick} className="hover:text-amber-900 cursor-pointer">{isSignIn ? "Sign Up now." : "Sign In."}</span>
+           <span onClick={handleLoginClick} className="hover:text-amber-900 active:text-amber-900 cursor-pointer">{isSignIn ? "Sign Up now." : "Sign In."}</span>
           </p>
         </Form>
       </Formik>

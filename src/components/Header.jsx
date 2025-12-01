@@ -107,8 +107,8 @@ export const Header = () => {
           </div>
         ) : (
           <>
-          <BiDotsVerticalRounded className="text-amber-600 sm:hidden block text-3xl rounded-full hover:bg-amber-900 hover:text-white " onClick={handleDotsClick}/>
-          <IoSearch  onClick={()=> dispatch(toggleSearch(true))} className="text-amber-600 text-2xl sm:hidden block absolute right-22"/>
+          <BiDotsVerticalRounded className="text-amber-600 sm:hidden block text-3xl rounded-full hover:scale-110 cursor-pointer active:scale-110 " onClick={handleDotsClick}/>
+          <IoSearch  onClick={()=> dispatch(toggleSearch(true))} className="text-amber-600 text-2xl sm:hidden block absolute right-22 hover:scale-110 cursor-pointer active:scale-110"/>
           {
             show && (
               <>
@@ -127,7 +127,7 @@ export const Header = () => {
               </span>
                 </div>
                 <button
-              className="flex items-center text-white p-2 rounded-sm cursor-pointer border border-amber-50 hover:bg-orange-700 font-semibold text-sm"
+              className="flex items-center text-white p-2 rounded-sm cursor-pointer border border-amber-50 hover:bg-amber-700 active:bg-amber-700 font-semibold text-sm"
               onClick={handleClick}
             >
               <IoMdLogOut className="text-xl mr-1" /> Sign Out

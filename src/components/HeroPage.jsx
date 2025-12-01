@@ -38,7 +38,7 @@ export const HeroPage = () => {
         <img
           src={BG_IMAGE_URL}
           alt="hero-image"
-          className="w-full h-screen object-cover brightness-30"
+          className="w-full h-screen object-cover brightness-40"
         />
       </div>
 
@@ -60,7 +60,7 @@ export const HeroPage = () => {
               value={userEmail}
               onChange={handleChange}
               placeholder="Email address"
-              className="border-2 border-gray-500 py-4 px-4 rounded-sm text-white outline-none hover:border-amber-600 w-72"
+              className="border-2 border-gray-500 py-4 px-4 rounded-sm text-white outline-none hover:border-amber-600 focus:border-amber-600 w-72"
             />
             {emailError && (
               <span className="text-amber-700 font-semibold text-[12px] relative -left-10">
@@ -69,7 +69,7 @@ export const HeroPage = () => {
             )}
           </div>
           <button
-            className="flex items-center cursor-pointer bg-amber-700 text-white p-4 rounded-sm shadow-2xl hover:bg-orange-600"
+            className="flex items-center cursor-pointer bg-amber-700 text-white p-4 rounded-sm shadow-2xl hover:bg-orange-600 active:bg-orange-600"
             onClick={handleClick}
           >
             Get Started <MdArrowForward className="text-lg ml-1"/>

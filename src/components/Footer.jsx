@@ -82,7 +82,7 @@ export const Footer = () => {
             />
             {error && <p className="text-amber-700 text-sm">{error}</p>}
             </div>
-            <button className="bg-red-600 px-6 py-3 rounded-md text-white hover:bg-red-700 transition-colors shadow-lg" onClick={handleSignInClick}>
+            <button className="bg-red-600 px-6 py-3 rounded-md text-white hover:bg-red-700 active:bg-red-700 transition-colors shadow-lg" onClick={handleSignInClick}>
               Sign In
             </button>
           </div>
@@ -120,6 +120,7 @@ export const Footer = () => {
     cursor-pointer
     rounded-full shadow-xl
     hover:bg-red-700
+    active:bg-red-700
     transition-all duration-300
     animate-bounce
   "

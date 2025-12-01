@@ -46,12 +46,12 @@ export const SearchMovies = () => {
           <img
             src={BG_IMAGE_URL}
             alt="hero-image"
-            className="w-full h-screen object-cover brightness-20"
+            className="w-full h-screen object-cover brightness-30"
           />
         </div>
 
         <GiCrossedBones
-          className="absolute top-5 right-10 sm:top-10 sm:right-20 text-4xl p-2 text-amber-600 z-20 cursor-pointer rounded-full hover:bg-amber-900 hover:text-amber-50 hover:scale-105 "
+          className="absolute top-5 right-10 sm:top-10 sm:right-20 text-4xl p-2 text-amber-600 z-20 cursor-pointer rounded-full hover:bg-amber-900 hover:text-amber-50 hover:scale-105 active:scale-110 "
           onClick={() => dispatch(resetSearchMovies())}
         />
 
@@ -73,12 +73,12 @@ export const SearchMovies = () => {
               <input
                 type="text"
                 placeholder="What would you like to watch today?"
-                className="p-2 px-4 pl-9 m-4 border border-amber-600 rounded-md w-[95%] sm:w-md ml-2 sm:ml-10 outline-none hover:border-amber-800"
+                className="p-2 px-4 pl-9 m-4 border border-amber-600 rounded-md w-[95%] sm:w-md ml-2 sm:ml-10 outline-none hover:border-amber-800 focus:border-amber-800"
                 ref={text}
               />
             </div>
             <button
-              className="p-2 bg-amber-700 rounded-xl px-8 cursor-pointer hover:bg-amber-800"
+              className="p-2 bg-amber-700 rounded-xl px-8 cursor-pointer hover:bg-amber-800 active:bg-amber-800"
               onClick={handleSearchClick}
             >
               Search
