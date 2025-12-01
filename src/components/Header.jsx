@@ -9,12 +9,18 @@ import { ResetTvSeries } from "../utils/tvSeriesSlice";
 import {toggleSearch} from '../utils/searchMovieSlice';
 import { IoMdLogOut } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
+import { BiDotsVerticalRounded } from "react-icons/bi";
+import { useEffect, useRef, useState } from "react";
+import { IoFilter } from "react-icons/io5";
 
 export const Header = () => {
   const data = useSelector((store) => store.user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [show, setShow] = useState(false);
+  const boxRef = useRef(null);
 
   const handleClick = () => {
     signOut(auth)
@@ -30,6 +36,24 @@ export const Header = () => {
       });
   };
 
+
+  const handleDotsClick = ()=>{
+    setShow(!show);
+  }
+ 
+
+  // when clicking outside
+    useEffect(() => {
+    function handleClickOutside(event) {
+      if (boxRef.current && !boxRef.current.contains(event.target)) {
+        setShow(false);   // 👈 close when clicking outside
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   // // it is observer
   // useEffect(() => {
   //   const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -57,13 +81,13 @@ export const Header = () => {
 
   return (
     <>
-      <div className="absolute z-30 flex items-center justify-between w-full mx-auto p-2 pt-8 px-10 sm:px-32 bg-linear-to-b from-black">
+      <div className="absolute z-30 flex items-center justify-between w-full mx-auto p-2 pt-8 px-10 md:px-32 bg-linear-to-b from-black">
         <Link to={"/"}>
-          {/* <img src={LOGO_URL} alt="netflix-logo" className="w-44" /> */}
-          <h1 className="w-44 text-red-600 font-bold italic text-3xl">HyperFlix</h1>
+          <img src={LOGO_URL} alt="netflix-logo" className="w-48 absolute -top-12 " />
+          
         </Link>
         {data.uid === "" ? (
-          <div className="flex items-center space-x-8">
+          <div className="flex items-center space-x-8 hidden sm:block">
             <div className="relative inline-block">
               <select className="appearance-none border rounded-sm pl-4 pr-8 py-2 text-sm border-white bg-black text-white focus:outline-none cursor-pointer hover:border-amber-600">
                 <option className="cursor-pointer">English</option>
@@ -82,7 +106,37 @@ export const Header = () => {
             </Link>
           </div>
         ) : (
-          <div className="flex items-center justify-end">
+          <>
+          <BiDotsVerticalRounded className="text-amber-600 sm:hidden block text-3xl rounded-full hover:bg-amber-900 hover:text-white " onClick={handleDotsClick}/>
+          <IoSearch  onClick={()=> dispatch(toggleSearch(true))} className="text-amber-600 text-2xl sm:hidden block absolute right-22"/>
+          {
+            show && (
+              <>
+              <div ref={boxRef} className="bg-amber-900 w-50 h-fit absolute right-6 top-16 rounded-xl p-4 flex flex-col gap-y-4 items-center">
+                <div className="flex items-center">
+                  <img
+                src={data?.photoURL}
+                alt="user-avatar"
+                className="w-10 h-10 rounded-4xl mr-2"
+              />
+              <span className="text-white font-medium mr-4">
+                Hello,{" "}
+                {data?.fullName.length > 10
+                  ? data?.fullName.slice(0, 10) + "..."
+                  : data?.fullName}
+              </span>
+                </div>
+                <button
+              className="flex items-center text-white p-2 rounded-sm cursor-pointer border border-amber-50 hover:bg-orange-700 font-semibold text-sm"
+              onClick={handleClick}
+            >
+              <IoMdLogOut className="text-xl mr-1" /> Sign Out
+            </button>
+              </div>
+              </>
+            )
+          }
+           <div className="flex items-center justify-end -mt-2 hidden sm:block sm:flex">
             <div className="flex items-center mx-2">
               <button
               onClick={()=> dispatch(toggleSearch(true))}
@@ -113,6 +167,8 @@ export const Header = () => {
               <IoMdLogOut className="text-xl mr-1" /> Sign Out
             </button>
           </div>
+          </>
+         
         )}
       </div>
     </>

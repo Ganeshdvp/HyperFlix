@@ -224,7 +224,7 @@ export const Login = () => {
         validationSchema={isSignIn ? signInValidation : signUpValidation}
         onSubmit={submitFormData}
       >
-        <Form className="flex flex-col items-center p-8 bg-[rgba(0,0,0,0.6)]  absolute z-20 text-amber-50 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 sm:w-3/12">
+        <Form className="flex flex-col items-center p-8 bg-[rgba(0,0,0,0.6)]  absolute z-20 text-amber-50 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[70%] sm:w-[60%] md:w-[50%] lg:w-[40%] xl:w-3/12">
           <h1 className="py-2 font-bold text-2xl mb-6">
             {isSignIn ? "Sign In" : "Sign Up"}
           </h1>
@@ -297,7 +297,7 @@ export const Login = () => {
             className="bg-amber-700 w-full rounded-sm p-2 mb-4 cursor-pointer hover:opacity-80"
             type="submit"
           >
-            {isLoading ? ( <FaSpinner className="text-white text-2xl animate-spin ml-35"/>) : (
+            {isLoading ? ( <FaSpinner className="text-white text-2xl animate-spin w-full"/>) : (
               <p>{isSignIn ? "Sign In" : "Sign Up"}</p>
             )}
           </button>

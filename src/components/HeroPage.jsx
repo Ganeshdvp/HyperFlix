@@ -32,7 +32,8 @@ export const HeroPage = () => {
 
   return (
     <>
-      <Header />
+    <div className="w-screen h-screen">
+        <Header />
       <div>
         <img
           src={BG_IMAGE_URL}
@@ -40,7 +41,9 @@ export const HeroPage = () => {
           className="w-full h-screen object-cover brightness-30"
         />
       </div>
-      <div className="absolute top-4/12 left-1/2 transform -translate-x-1/2 w-6/12 text-center px-4">
+
+
+      <div className="absolute top-4/12 left-1/2 transform -translate-x-1/2 w-[80%] text-center px-4 sm:w-9/12 md:w-6/12 lg:6/12">
         <h1 className="text-6xl text-white font-bold">
           Unlimited movies, shows, and more
         </h1>
@@ -50,7 +53,7 @@ export const HeroPage = () => {
         <p className="text-white font-bold">
           Ready to watch? Enter your email to create or restart your membership.
         </p>
-        <div className="flex justify-center items-start mt-8 space-x-4 my-4 h-22">
+        <div className="flex flex-col justify-center items-center space-y-2 mt-8 space-x-4 my-4 h-22 sm:flex sm:flex-row sm:items-start">
           <div className="flex flex-col">
             <input
               type="email"
@@ -66,7 +69,7 @@ export const HeroPage = () => {
             )}
           </div>
           <button
-            className="flex items-center cursor-pointer bg-amber-700 text-white p-4 rounded-sm shadow-2xl hover:bg-orange-600 "
+            className="flex items-center cursor-pointer bg-amber-700 text-white p-4 rounded-sm shadow-2xl hover:bg-orange-600"
             onClick={handleClick}
           >
             Get Started <MdArrowForward className="text-lg ml-1"/>
@@ -96,6 +99,7 @@ export const HeroPage = () => {
       <ReasonToJoin />
       <Accordian />
       <Footer/>
+    </div>
     </>
   );
 };

@@ -71,7 +71,7 @@ export const Footer = () => {
           </div>
 
           {/* Newsletter Signup */}
-          <div className="flex flex-col sm:flex-row justify-center items-start gap-4 mb-12 h-28" >
+          <div className="flex flex-col sm:flex-row justify-center items-center sm:items-start gap-4 mb-12 h-28" >
             <div className="flex flex-col items-start">
               <input
               type="email"
@@ -94,7 +94,7 @@ export const Footer = () => {
               (Icon, idx) => (
                 <a
                   key={idx}
-                  href="#"
+                  href="/"
                   className="hover:text-white transform hover:scale-110 transition-transform duration-300"
                 >
                   <Icon />

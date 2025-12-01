@@ -47,8 +47,7 @@ export const ForgetPassword = () => {
   return (
     <>
       <Link to={"/"}>
-          {/* <img src={LOGO_URL} alt="netflix-logo" className="w-44" /> */}
-          <h1 className="w-44 absolute z-10 top-7 left-32 cursor-pointer text-red-600 font-bold italic text-3xl">HyperFlix</h1>
+          <img src={LOGO_URL} alt="netflix-logo" className="w-48 absolute z-10 -top-12 left-12 sm:left-32 cursor-pointer" />
         </Link>
       <div>
         <img
@@ -58,7 +57,7 @@ export const ForgetPassword = () => {
         />
       </div>
 
-      <div className="bg-[rgba(0,0,0,0.6)] w-6/12 h-96 z-20 absolute left-1/2 transform -translate-x-1/2 top-32 rounded-md">
+      <div className="bg-[rgba(0,0,0,0.6)] w-[70%] sm:w-[60%] md:w-[60%] lg:w-6/12 h-110 sm:h-96 z-20 absolute left-1/2 transform -translate-x-1/2 top-32 rounded-md">
         <h1 className="text-3xl text-amber-50 font-bold pt-8 text-center mt-4" >
           Forgot Password
         </h1>
@@ -71,7 +70,7 @@ export const ForgetPassword = () => {
           value={email}
           onChange={(e)=> setEmail(e.currentTarget.value)}
           placeholder="Enter your email"
-          className="mx-auto block mt-12 px-4 py-2 w-md rounded-md outline-none text-white bg-gray-800 focus:border-red-600"
+          className="mx-auto block mt-12 px-4 py-2 w-[70%] sm:md rounded-md outline-none text-white bg-gray-800 focus:border-red-600"
         />
         <button onClick={handleSendResetMail} className="bg-red-600 text-amber-50 px-6 py-2 rounded-md mt-6 block mx-auto hover:bg-red-700 cursor-pointer">
           {

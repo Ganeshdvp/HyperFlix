@@ -12,11 +12,11 @@ export const Trending = () => {
 
   return (
     <>
-    <div className='bg-black'>
+    <div className='bg-black w-screen'>
 
-        <h2 className='text-white text-2xl ml-38 font-bold py-6'>Trending Now</h2>
+        <h2 className='font-bold text-2xl p-4 sm:text-xl sm:px-6 md:text-2xl md:px-40 lg:px-40 -mb-3 text-white mb-4'>Trending Now</h2>
 
-        <div className='flex space-x-6 ml-45 pb-12'>
+        <div className='flex space-x-6 mx-auto pb-12 w-[80%] sm:w-[80%] sm:mx-auto md:ml-45 md:w-[75%] overflow-x-auto scrollbar-hide'>
             {
             images.map((item,index)=>{
                 return (
