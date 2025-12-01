@@ -113,3 +113,6 @@
 
 - chnaged the enitre app names and firebase config also!
 - making responsive!
+
+
+---------Completed----------
