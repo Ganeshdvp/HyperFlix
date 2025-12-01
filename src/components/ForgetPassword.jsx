@@ -46,13 +46,10 @@ export const ForgetPassword = () => {
 
   return (
     <>
-      <Link to="/">
-        <img
-          src={LOGO_URL}
-          alt="netflix-logo"
-          className="w-44 absolute z-10 top-2 left-32 cursor-pointer"
-        />
-      </Link>
+      <Link to={"/"}>
+          {/* <img src={LOGO_URL} alt="netflix-logo" className="w-44" /> */}
+          <h1 className="w-44 absolute z-10 top-7 left-32 cursor-pointer text-red-600 font-bold italic text-3xl">HyperFlix</h1>
+        </Link>
       <div>
         <img
           src={BG_IMAGE_URL}

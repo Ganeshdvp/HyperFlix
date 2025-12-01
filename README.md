@@ -1,4 +1,4 @@
-# NetflixGPT App
+# hyperflix App
 
 - install  vite with react
 - setup react project
@@ -111,3 +111,4 @@
 
 # task-14
 
+- chnaged the enitre app names and firebase config also!

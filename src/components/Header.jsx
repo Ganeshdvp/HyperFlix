@@ -57,9 +57,10 @@ export const Header = () => {
 
   return (
     <>
-      <div className="absolute z-30 flex items-center justify-between w-full mx-auto p-2 px-10 sm:px-32 bg-linear-to-b from-black">
+      <div className="absolute z-30 flex items-center justify-between w-full mx-auto p-2 pt-8 px-10 sm:px-32 bg-linear-to-b from-black">
         <Link to={"/"}>
-          <img src={LOGO_URL} alt="netflix-logo" className="w-44" />
+          {/* <img src={LOGO_URL} alt="netflix-logo" className="w-44" /> */}
+          <h1 className="w-44 text-red-600 font-bold italic text-3xl">HyperFlix</h1>
         </Link>
         {data.uid === "" ? (
           <div className="flex items-center space-x-8">

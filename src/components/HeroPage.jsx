@@ -6,6 +6,7 @@ import { Accordian } from "./Accordian";
 import { ReasonToJoin } from "./ReasonToJoin";
 import { Trending } from "./Trending";
 import {Footer} from './Footer';
+import { MdArrowForward } from "react-icons/md";
 
 
 export const HeroPage = () => {
@@ -59,16 +60,16 @@ export const HeroPage = () => {
               className="border-2 border-gray-500 py-4 px-4 rounded-sm text-white outline-none hover:border-amber-600 w-72"
             />
             {emailError && (
-              <span className="text-amber-700 font-semibold text-[12px] relative -left-8">
+              <span className="text-amber-700 font-semibold text-[12px] relative -left-10">
                 {emailError}
               </span>
             )}
           </div>
           <button
-            className=" bg-amber-700 text-white p-4 rounded-sm shadow-2xl hover:bg-orange-600 "
+            className="flex items-center cursor-pointer bg-amber-700 text-white p-4 rounded-sm shadow-2xl hover:bg-orange-600 "
             onClick={handleClick}
           >
-            Get Started &gt;
+            Get Started <MdArrowForward className="text-lg ml-1"/>
           </button>
         </div>
       </div>

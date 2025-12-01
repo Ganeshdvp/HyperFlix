@@ -108,7 +108,7 @@ export const Footer = () => {
 
           {/* Footer Copy */}
           <p className="text-gray-500 text-sm mt-4">
-            &copy; 2025 Netflix GPT. All rights reserved.
+            &copy; 2025 HyperFlix. All rights reserved.
           </p>
 
           {/* Back to Top Button */}

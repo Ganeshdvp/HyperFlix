@@ -352,7 +352,7 @@ export const Login = () => {
           <p
             className="text-sm"
           >
-           {isSignIn ? ("New to Netflix? ") : ("Already have an account? ")}
+           {isSignIn ? ("New to HyperFlix? ") : ("Already have an account? ")}
            <span onClick={handleLoginClick} className="hover:text-amber-900 cursor-pointer">{isSignIn ? "Sign Up now." : "Sign In."}</span>
           </p>
         </Form>
