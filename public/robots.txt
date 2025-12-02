@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap:https://hyperflix-5h8.pages.dev/

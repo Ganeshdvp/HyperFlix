@@ -42,7 +42,7 @@ export const HeroPage = () => {
 
   return (
     <>
-    <div className="w-screen h-screen">
+    <main className="w-screen h-screen">
         <Header />
       <div>
         <img
@@ -110,7 +110,7 @@ export const HeroPage = () => {
       <ReasonToJoin />
       <Accordian />
       <Footer/>
-    </div>
+    </main>
     </>
   );
 };
