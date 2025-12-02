@@ -87,7 +87,7 @@ export const Header = () => {
 
   return (
     <>
-      <div className="absolute z-30 flex items-center justify-between w-full mx-auto p-2 pt-8 px-10 md:px-32 bg-linear-to-b from-black">
+      <header className="absolute z-30 flex items-center justify-between w-full mx-auto p-2 pt-8 px-10 md:px-32 bg-linear-to-b from-black">
         <Link to={"/"}>
           <img src={LOGO_URL} alt="netflix-logo" className="w-48 absolute -top-12 " />
           
@@ -95,7 +95,10 @@ export const Header = () => {
         {data.uid === "" ? (
           <div className="flex items-center space-x-8 hidden sm:block">
             <div className="relative inline-block">
-              <select onChange={handleLangClick} value={language} className="appearance-none border rounded-sm pl-4 pr-8 py-2 text-sm border-white bg-black text-white focus:outline-none cursor-pointer hover:border-amber-600">
+              <label htmlFor="languageSelect" className="sr-only">
+              Select language
+            </label>
+              <select onChange={handleLangClick} value={language} id="languageSelect" className="appearance-none border rounded-sm pl-4 pr-8 py-2 text-sm border-white bg-black text-white focus:outline-none cursor-pointer hover:border-amber-600">
                 <option className="cursor-pointer"value={"en"}>English</option>
                 <option className="cursor-pointer" value={"telugu"}>Telugu</option>
                 <option className="cursor-pointer" value={"hindi"}>Hindi</option>
@@ -176,7 +179,7 @@ export const Header = () => {
           </>
          
         )}
-      </div>
+      </header>
     </>
   );
 };
