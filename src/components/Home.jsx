@@ -45,12 +45,10 @@ export const Home = () => {
     <>
       {data ? <SearchMovies /> : (
         <>
-        <main>
-           <Header />
+          <Header />
           <FirstContainer />
           <SecondContainer />
           <Footer />
-        </main>
         </>
       )}
     </>

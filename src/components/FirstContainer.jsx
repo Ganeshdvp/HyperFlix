@@ -20,6 +20,7 @@ export const FirstContainer = () => {
 
   return (
     <>
+    <main>
       <div className="flex flex-col pl-8 absolute pt-70 sm:pt-82 sm:pl-8 md:pl-8 lg:pl-20 bg-linear-to-r from-black w-screen aspect-video shadow-2xl z-20">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">{original_title}</h1>
         <p className="text-md text-start w-10/12 sm:w-10/12 md:w-7/12 lg:w-4/12 mb-1 text-gray-300">{overview.length > 250 ? overview.slice(0,250)+ " more..." : overview}</p>
@@ -36,6 +37,7 @@ export const FirstContainer = () => {
       </div>
 
       <BgVideoPlayer id={id}/>
+       </main>
     </>
   );
 };

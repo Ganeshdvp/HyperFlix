@@ -77,7 +77,7 @@ export const Footer = () => {
             ].map((link, idx) => (
               <a
                 key={idx}
-                aria-label={link}
+                aria-label={link || `Footer link ${idx + 1}`}
                 href="#"
                 className="relative hover:text-white transition-colors duration-300"
               >
@@ -140,6 +140,7 @@ export const Footer = () => {
                 <a
                   key={idx}
                   href="/"
+                  aria-label={`Footer link ${idx + 1}`}
                   className="hover:text-white transform hover:scale-110 transition-transform duration-300"
                 >
                   <Icon />

@@ -95,10 +95,10 @@ export const Header = () => {
         {data.uid === "" ? (
           <div className="flex items-center space-x-8 hidden sm:block">
             <div className="relative inline-block">
-              <label htmlFor="languageSelect" className="sr-only">
+              <label htmlFor="languageSelect2" className="sr-only">
               Select language
             </label>
-              <select onChange={handleLangClick} value={language} id="languageSelect" className="appearance-none border rounded-sm pl-4 pr-8 py-2 text-sm border-white bg-black text-white focus:outline-none cursor-pointer hover:border-amber-600">
+              <select onChange={handleLangClick} value={language} id="languageSelect2" className="appearance-none border rounded-sm pl-4 pr-8 py-2 text-sm border-white bg-black text-white focus:outline-none cursor-pointer hover:border-amber-600">
                 <option className="cursor-pointer"value={"en"}>English</option>
                 <option className="cursor-pointer" value={"telugu"}>Telugu</option>
                 <option className="cursor-pointer" value={"hindi"}>Hindi</option>
