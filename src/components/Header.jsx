@@ -164,7 +164,7 @@ export const Header = () => {
               />
               <span className="text-white font-medium mr-4">
                 {lang[language].hello},{" "}
-                {data?.fullName.length > 10
+                {data?.fullName?.length > 10
                   ? data?.fullName.slice(0, 10) + "..."
                   : data?.fullName}
               </span>
