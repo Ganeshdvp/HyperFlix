@@ -1,56 +1,60 @@
-import { createBrowserRouter } from 'react-router-dom'; 
-import { HeroPage } from './HeroPage';
-import { Login } from './Login';
-import { RouterProvider } from 'react-router-dom';
-import { Home } from './Home';
-import { ForgetPassword } from './ForgetPassword';
-import { PublicRoute } from '../routes/PublicRoute';
-import { ProtectRoute } from '../routes/ProtectRoute';
+import { createBrowserRouter } from "react-router-dom";
+import { HeroPage } from "./HeroPage";
+import { Login } from "./Login";
+import { RouterProvider } from "react-router-dom";
+import { Home } from "./Home";
+import { ForgetPassword } from "./ForgetPassword";
+import { PublicRoute } from "../routes/PublicRoute";
+import { ProtectRoute } from "../routes/ProtectRoute";
+import { VideoPageContainer } from "./VideoPageContainer";
 
 export const Body = () => {
-
-
   const appRouter = createBrowserRouter([
     {
-      path:'/',
-      element:(
+      path: "/",
+      element: (
         <PublicRoute>
-          <HeroPage/>
+          <HeroPage />
         </PublicRoute>
-      )
+      ),
     },
     {
-      path:'/login',
-       element:(
+      path: "/login",
+      element: (
         <PublicRoute>
-          <Login/>
+          <Login />
         </PublicRoute>
-      )
+      ),
     },
     {
-      path:'/home',
-       element:(
+      path: "/home",
+      element: (
         <ProtectRoute>
-          <Home/>
+          <Home />
         </ProtectRoute>
-      )
+      ),
     },
     {
-      path:'/forget-password',
-       element:(
-        <PublicRoute>
-          <ForgetPassword/>
-        </PublicRoute>
-      )
+      path: "home/v/:id/",
+      element: (
+        <ProtectRoute>
+          <VideoPageContainer/>
+        </ProtectRoute>
+      ),
     },
-  ])
+    {
+      path: "/forget-password",
+      element: (
+        <PublicRoute>
+          <ForgetPassword />
+        </PublicRoute>
+      ),
+    },
+  ]);
 
   return (
     <>
-    <RouterProvider router = {appRouter}/>
+      <RouterProvider router={appRouter} />
     </>
-  )
-}
-
-
-
+  );
+};

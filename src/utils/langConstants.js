@@ -77,7 +77,10 @@ const lang = {
         searchDescription : "Looking for a movie to watch? Type the name of any movie in the search box, and our AI-powered search will instantly show you matching titles. Only movies with available posters are displayed, so you can easily browse and pick your favorite film.",
         inputPlaceHolder : "What would you like to watch today?",
         searchButton : "Search",
-        results : "Search results"
+        results : "Search results",
+
+        // video player page
+        recommandationMovies : "Recommended Movies",
     },
     hindi:{
         //hero page
@@ -156,7 +159,10 @@ const lang = {
         searchDescription : "कोई फ़िल्म देखने के लिए खोज रहे हैं? खोज बॉक्स में किसी भी फ़िल्म का नाम टाइप करें, हमारा AI-सक्षम सर्च तुरंत मिलते-जुलते शीर्षक दिखाएगा। केवल उन फ़िल्मों को दिखाया जाता है जिनके पोस्टर उपलब्ध हैं, ताकि आप आसानी से ब्राउज़ कर सकें और अपनी पसंदीदा फ़िल्म चुन सकें।",
         inputPlaceHolder : "आज आप क्या देखना चाहेंगे?",
         searchButton : "खोजें",
-        results : "परिणाम"
+        results : "परिणाम",
+
+          // video player page
+        recommandationMovies : "सिफारिशी फ़िल्में",
     },
     telugu:{
          //hero page
@@ -235,7 +241,10 @@ const lang = {
         searchDescription : "చూడటానికి సినిమా కోసం చూస్తున్నారా? సెర్చ్ బాక్స్‌లో ఏదైనా సినిమా పేరు టైప్ చేయండి, మా AI-ఆధారిత శోధన తక్షణమే మీకు సరిపోయే శీర్షికలను చూపుతుంది. అందుబాటులో ఉన్న పోస్టర్‌లు ఉన్న సినిమాలు మాత్రమే ప్రదర్శించబడతాయి, కాబట్టి మీరు సులభంగా బ్రౌజ్ చేసి మీకు ఇష్టమైన సినిమాను ఎంచుకోవచ్చు.",
         inputPlaceHolder : "ఈరోజు మీరు ఏమి చూడాలనుకుంటున్నారు?",
         searchButton : "వెటకండి",
-        results : "ఫలితాలు"
+        results : "ఫలితాలు",
+
+           // video player page
+        recommandationMovies : "సిఫారసు సినిమాలు",
     }
 }
 

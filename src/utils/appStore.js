@@ -4,7 +4,7 @@ import moviesSlice from './moviesSlice';
 import tvSeriesSlice from './tvSeriesSlice';
 import searchMovieSlice from './searchMovieSlice';
 import langConfigSlice from './langConfigSlice';
-
+import videosSlice from './videosSlice';
 
 const appStore = configureStore({
     reducer: {
@@ -13,6 +13,7 @@ const appStore = configureStore({
         tvSeries: tvSeriesSlice,
         searchMovies: searchMovieSlice,
         language : langConfigSlice,
+        videos : videosSlice,
     }
 })
 

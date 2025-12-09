@@ -9,12 +9,15 @@ import useArrivingTv from "../hooks/useArrivingTv";
 import useTvTrending from "../hooks/useTvTrending";
 import { Footer } from "./Footer";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SearchMovies } from "./SearchMovies";
+import { clearState } from '../utils/videosSlice';
 
 export const Home = () => {
   
   const data = useSelector((store) => store.searchMovies.toggleSearchState);
+  const dispatch = useDispatch();
+  
 
   useNowPlaying();
   usePopular();
@@ -40,6 +43,10 @@ export const Home = () => {
       window.removeEventListener("offline", offLine);
     };
   },[]);
+
+  useEffect(()=>{
+    dispatch(clearState())
+  },[])
 
   return (
     <>

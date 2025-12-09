@@ -1,11 +1,13 @@
 import { useSelector } from "react-redux";
 import { IMG_URL } from "../utils/constants";
 import lang from "../utils/langConstants";
+import {Link} from 'react-router-dom';
 
 export const SecondContainer = () => {
   const {nowPlayingMoviesState, popularMoviesState, topRatedMoviesState, upComingMoviesState } = useSelector((store) => store.nowPlaying);
   const {arrivingTvSeriesState, trendingTvState} = useSelector((store)=> store.tvSeries)
   const language = useSelector(store => store.language?.languageState);
+
 
   return (
     <>
@@ -22,11 +24,13 @@ export const SecondContainer = () => {
             {nowPlayingMoviesState?.map((item) => {
               return (
                 <div key={item.id} className="shrink-0">
+                  <Link to={'/home/v/'+ item.id}>
                   <img
                     src={IMG_URL + item.poster_path}
                     alt="posters"
                     className="w-50 h-65 object-cover rounded-xl hover:scale-105 transition-transform duration-300 ease-in-out"
                   />
+                  </Link>
                 </div>
               );
             })}
@@ -45,11 +49,13 @@ export const SecondContainer = () => {
             {popularMoviesState?.map((item) => {
               return (
                 <div key={item.id} className="shrink-0">
+                  <Link to={'/home/v/'+ item.id}>
                   <img
                     src={IMG_URL + item.poster_path}
                     alt="posters"
                     className="w-50 h-65 object-cover rounded-xl hover:scale-105 transition-transform duration-300 ease-in-out"
                   />
+                  </Link>
                 </div>
               );
             })}
@@ -68,11 +74,13 @@ export const SecondContainer = () => {
             {topRatedMoviesState?.map((item) => {
               return (
                 <div key={item.id} className="shrink-0">
+                  <Link to={'/home/v/'+ item.id}>
                   <img
                     src={IMG_URL + item.poster_path}
                     alt="posters"
                     className="w-50 h-65 object-cover rounded-xl hover:scale-105 transition-transform duration-300 ease-in-out"
                   />
+                  </Link>
                 </div>
               );
             })}
@@ -91,11 +99,13 @@ export const SecondContainer = () => {
             {upComingMoviesState?.map((item) => {
               return (
                 <div key={item.id} className="shrink-0">
+                  <Link to={'/home/v/'+ item.id}>
                   <img
                     src={IMG_URL + item.poster_path}
                     alt="posters"
                     className="w-50 h-65 object-cover rounded-xl hover:scale-105 transition-transform duration-300 ease-in-out"
                   />
+                  </Link>
                 </div>
               );
             })}
@@ -114,11 +124,13 @@ export const SecondContainer = () => {
             {arrivingTvSeriesState?.map((item) => {
               return (
                 <div key={item.id} className="shrink-0">
+                  <Link to={'/home/v/'+ item.id}>
                   <img
                     src={IMG_URL + item.poster_path}
                     alt="posters"
                     className="w-50 h-65 object-cover rounded-xl hover:scale-105 transition-transform duration-300 ease-in-out"
                   />
+                  </Link>
                 </div>
               );
             })}
@@ -137,11 +149,13 @@ export const SecondContainer = () => {
             {trendingTvState?.map((item) => {
               return (
                 <div key={item.id} className="shrink-0">
+                  <Link to={'/home/v/'+ item.id}>
                   <img
                     src={IMG_URL + item.poster_path}
                     alt="posters"
-                    className="w-50 h-65 object-fit rounded-xl hover:scale-105 transition-transform duration-300 ease-in-out"
+                    className="w-50 h-65 object-cover rounded-xl hover:scale-105 transition-transform duration-300 ease-in-out"
                   />
+                  </Link>
                 </div>
               );
             })}

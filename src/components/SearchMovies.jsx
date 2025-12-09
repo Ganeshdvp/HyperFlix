@@ -10,12 +10,14 @@ import {
 } from "../utils/searchMovieSlice";
 import { Footer } from "./Footer";
 import lang from "../utils/langConstants";
+import { useNavigate } from "react-router-dom";
 
 export const SearchMovies = () => {
   const dispatch = useDispatch();
   const text = useRef();
   const data = useSelector((store) => store.searchMovies.searchResultMovies);
    const language = useSelector(store => store.language?.languageState);
+   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
   const [searchClicked, setSearchClicked] = useState(false);
@@ -45,6 +47,10 @@ export const SearchMovies = () => {
     if(e.key === 'Enter'){
       handleSearchClick();
     }
+  }
+
+  const handleImageClick = (searchKey)=>{
+    navigate(`/home/v/${searchKey}`)
   }
 
   return (
@@ -120,9 +126,10 @@ export const SearchMovies = () => {
                   return (
                     <div key={item.id} className="shrink-0">
                       <img
+                      onClick={()=> handleImageClick(item.id)}
                         src={IMG_URL + item.poster_path}
                         alt="posters"
-                        className="w-40 h-55 object-cover rounded-xl hover:scale-105 transition-transform duration-300 ease-in-out"
+                        className="w-40 h-55 object-cover rounded-xl cursor-pointer hover:scale-105 active:scale-105 transition-transform duration-300 ease-in-out"
                       />
                     </div>
                   );
