@@ -3,6 +3,7 @@ import { BgVideoPlayer } from "./BgVideoPlayer";
 import { FaPlay } from "react-icons/fa";
 import { HiOutlineInformationCircle } from "react-icons/hi";
 import lang from "../utils/langConstants";
+import { useNavigate } from "react-router-dom";
 
 
 export const FirstContainer = () => {
@@ -10,6 +11,7 @@ export const FirstContainer = () => {
   const movies = useSelector(
     (store) => store.nowPlaying?.nowPlayingMoviesState
   );
+  const navigate = useNavigate();
 
      const language = useSelector(store => store.language?.languageState);
   
@@ -17,7 +19,10 @@ export const FirstContainer = () => {
 
     const {id, original_title, overview, release_date } = movies[0];
 
-
+    const handlePlayButton = ()=>{
+      navigate(`/home/v/${id}`)
+    }
+    
   return (
     <>
     <main>
@@ -26,7 +31,7 @@ export const FirstContainer = () => {
         <p className="text-md text-start w-10/12 sm:w-10/12 md:w-7/12 lg:w-4/12 mb-1 text-gray-300">{overview.length > 250 ? overview.slice(0,250)+ " more..." : overview}</p>
         <p className="text-md mb-8 text-gray-200">Released on :- {release_date}</p>
         <div className="flex space-x-4">
-          <button className=" bg-white text-black p-3 rounded-sm px-6 font-semibold text-sm hover:scale-105 hover:text-white hover:bg-black active:bg-black active:text-white flex items-center cursor-pointer">
+          <button onClick={handlePlayButton} className=" bg-white text-black p-3 rounded-sm px-6 font-semibold text-sm hover:scale-105 hover:text-white hover:bg-black active:bg-black active:text-white flex items-center cursor-pointer">
             <FaPlay /> {lang[language].playButton}
           </button>
           <button className="bg-[rgba(168,168,168,0.19)]  text-white p-3 rounded-sm px-6 font-semibold text-sm hover:bg-[rgba(168,168,168,0.6)] active:bg-[rgba(168,168,168,0.6)] flex items-center cursor-pointer">
