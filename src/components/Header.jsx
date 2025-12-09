@@ -13,6 +13,7 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 import { useEffect, useRef, useState } from "react";
 import { changeLanguage } from '../utils/langConfigSlice';
 import lang from "../utils/langConstants";
+import {clearState} from '../utils/videosSlice'
 
 export const Header = () => {
   const data = useSelector((store) => store.user);
@@ -31,6 +32,7 @@ export const Header = () => {
         dispatch(removeUser());
         dispatch(ResetMovies());
         dispatch(ResetTvSeries());
+        dispatch(clearState())
         navigate("/");
       })
       .catch((error) => {
